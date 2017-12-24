@@ -7,22 +7,18 @@ import { DOCUMENT } from '@angular/platform-browser';
 
 export class FullscreenDirective implements AfterViewInit {
 
-  fullscreen: any;
-
   private element: any;
-
-  @Input('fullscreen')
-  set setFullscreen(val) {
-    if (val) {
-      this.launchFullscreen(this.element);
-    }
-  }
 
   constructor(private el: ElementRef, @Inject(DOCUMENT) private document: any) {
   }
 
   ngAfterViewInit() {
     this.element = this.el.nativeElement;
+  }
+  
+  @HostListener('click')
+  onClick() {
+    this.launchFullscreen(this.element);
   }
 
   launchFullscreen(element) {
